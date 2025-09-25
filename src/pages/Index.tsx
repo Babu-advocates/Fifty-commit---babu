@@ -101,10 +101,10 @@ const Index = () => {
         </div>
       </header>
 
-      {/* Enhanced Hero Section with Law Elements */}
-      <section className="relative py-24 overflow-hidden">
+      {/* Enhanced Hero Section with Law Elements - Landing Page Design */}
+      <section className="relative py-32 overflow-hidden min-h-[80vh] flex items-center">
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-15"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
           style={{ backgroundImage: `url(${heroBackground})` }}
         />
         
@@ -117,97 +117,86 @@ const Index = () => {
         </div>
 
         <div className="container mx-auto px-6 relative z-10">
-          <div className="text-center max-w-5xl mx-auto">
-            <div className="mb-8 animate-fade-in">
-              <div className="inline-flex items-center gap-3 bg-gradient-prestige p-4 rounded-full mb-6">
-                <Scale className="h-12 w-12 text-legal-deep-blue animate-3d-text" />
-                <Gavel className="h-12 w-12 text-legal-deep-blue" />
-                <BookOpen className="h-12 w-12 text-legal-deep-blue" />
+          <div className="text-center max-w-6xl mx-auto">
+            {/* Central Legal Icons */}
+            <div className="mb-12 animate-fade-in">
+              <div className="inline-flex items-center gap-4 bg-gradient-prestige p-6 rounded-2xl mb-8 shadow-elegant">
+                <Scale className="h-16 w-16 text-legal-deep-blue animate-3d-text" />
+                <Gavel className="h-16 w-16 text-legal-deep-blue" />
+                <BookOpen className="h-16 w-16 text-legal-deep-blue" />
               </div>
             </div>
             
-            <h2 className="text-6xl font-bold text-foreground mb-8 animate-slide-up">
-              <span className="bg-gradient-justice bg-clip-text text-transparent animate-shimmer">
+            {/* Main Heading */}
+            <h2 className="text-7xl font-bold text-foreground mb-6 animate-slide-up">
+              <span className="bg-gradient-justice bg-clip-text text-transparent animate-shimmer block mb-4">
                 Secure Case Management
               </span>
-              <span className="text-primary block mt-3 animate-glow-text">
+              <span className="text-primary animate-glow-text">
                 Between Advocates & Banks
               </span>
             </h2>
             
-            <p className="text-xl text-muted-foreground mb-16 leading-relaxed max-w-3xl mx-auto animate-fade-in">
-              A professional platform designed to streamline communication and case management 
-              between legal advocates and banking institutions with enterprise-grade security 
-              and compliance standards.
+            {/* Subtitle */}
+            <p className="text-2xl text-muted-foreground mb-20 leading-relaxed max-w-4xl mx-auto animate-fade-in">
+              A professional platform designed to streamline communication and case 
+              management between legal advocates and banking institutions with 
+              enterprise-grade security and compliance standards.
             </p>
             
-            {/* Enhanced Login Cards with Law Elements */}
-            <div className="grid md:grid-cols-2 gap-10 max-w-4xl mx-auto">
-              {/* Advocate Login Card */}
-              <Card className="bg-gradient-card shadow-elegant hover:shadow-glow transition-all duration-500 border-primary/30 hover:border-justice-gold/50 hover:scale-105 group relative overflow-hidden">
+            {/* Action Cards */}
+            <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+              {/* Advocate Portal Card */}
+              <Card className="bg-gradient-card shadow-elegant hover:shadow-glow transition-all duration-500 border-primary/30 hover:border-justice-gold/50 hover:scale-105 group relative overflow-hidden p-8">
                 <div className="absolute inset-0 bg-gradient-justice opacity-5 group-hover:opacity-10 transition-opacity"></div>
-                <CardHeader className="pb-6 relative z-10">
-                  <div className="mx-auto mb-6 relative">
-                    <div className="p-6 bg-gradient-law-firm rounded-full w-fit shadow-glow">
-                      <Scale className="h-16 w-16 text-justice-gold group-hover:animate-spin-3s" />
+                <CardContent className="relative z-10 text-center">
+                  <div className="mx-auto mb-8 relative">
+                    <div className="p-8 bg-gradient-law-firm rounded-full w-fit shadow-glow mx-auto">
+                      <Scale className="h-20 w-20 text-justice-gold group-hover:animate-spin-3s" />
                     </div>
-                    <div className="absolute -top-2 -right-2 p-2 bg-justice-gold rounded-full animate-pulse">
-                      <Gavel className="h-6 w-6 text-legal-deep-blue" />
+                    <div className="absolute -top-3 -right-3 p-3 bg-justice-gold rounded-full animate-pulse">
+                      <Gavel className="h-8 w-8 text-legal-deep-blue" />
                     </div>
                   </div>
-                  <CardTitle className="text-3xl text-primary mb-2 group-hover:text-justice-gold transition-colors">
+                  <h3 className="text-4xl font-bold mb-6 text-primary group-hover:text-justice-gold transition-colors">
                     Advocate Portal
-                  </CardTitle>
-                  <CardDescription className="text-lg">
+                  </h3>
+                  <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
                     Access your legal cases, manage client communications, and track case progress 
                     with professional legal tools
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="pt-4 relative z-10">
-                  <div className="mb-4 flex items-center justify-center gap-4 text-muted-foreground">
-                    <FileText className="h-5 w-5" />
-                    <BookOpen className="h-5 w-5" />
-                    <Award className="h-5 w-5" />
-                  </div>
+                  </p>
                   <Link to="/advocate-login">
-                    <Button variant="advocate" size="lg" className="w-full text-lg py-3 hover:bg-gradient-justice">
-                      Advocate Login
-                      <ArrowRight className="ml-2 h-6 w-6 group-hover:translate-x-1 transition-transform" />
+                    <Button variant="advocate" size="lg" className="w-full text-xl py-4 hover:bg-gradient-justice">
+                      Enter Portal
+                      <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </Link>
                 </CardContent>
               </Card>
 
-              {/* Bank Login Card */}
-              <Card className="bg-gradient-card shadow-elegant hover:shadow-glow transition-all duration-500 border-accent/30 hover:border-prestige-amber/50 hover:scale-105 group relative overflow-hidden">
+              {/* Banking Portal Card */}
+              <Card className="bg-gradient-card shadow-elegant hover:shadow-glow transition-all duration-500 border-accent/30 hover:border-prestige-amber/50 hover:scale-105 group relative overflow-hidden p-8">
                 <div className="absolute inset-0 bg-gradient-prestige opacity-5 group-hover:opacity-10 transition-opacity"></div>
-                <CardHeader className="pb-6 relative z-10">
-                  <div className="mx-auto mb-6 relative">
-                    <div className="p-6 bg-gradient-corporate rounded-full w-fit shadow-glow">
-                      <Building2 className="h-16 w-16 text-prestige-amber group-hover:animate-spin-3s" />
+                <CardContent className="relative z-10 text-center">
+                  <div className="mx-auto mb-8 relative">
+                    <div className="p-8 bg-gradient-corporate rounded-full w-fit shadow-glow mx-auto">
+                      <Building2 className="h-20 w-20 text-prestige-amber group-hover:animate-spin-3s" />
                     </div>
-                    <div className="absolute -top-2 -right-2 p-2 bg-prestige-amber rounded-full animate-pulse">
-                      <Shield className="h-6 w-6 text-legal-deep-blue" />
+                    <div className="absolute -top-3 -right-3 p-3 bg-prestige-amber rounded-full animate-pulse">
+                      <Shield className="h-8 w-8 text-legal-deep-blue" />
                     </div>
                   </div>
-                  <CardTitle className="text-3xl text-accent mb-2 group-hover:text-prestige-amber transition-colors">
+                  <h3 className="text-4xl font-bold mb-6 text-accent group-hover:text-prestige-amber transition-colors">
                     Banking Portal
-                  </CardTitle>
-                  <CardDescription className="text-lg">
+                  </h3>
+                  <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
                     Manage legal documentation, coordinate case workflows, and ensure 
                     compliance with banking regulations
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="pt-4 relative z-10">
-                  <div className="mb-4 flex items-center justify-center gap-4 text-muted-foreground">
-                    <Shield className="h-5 w-5" />
-                    <FileText className="h-5 w-5" />
-                    <Building2 className="h-5 w-5" />
-                  </div>
+                  </p>
                   <Link to="/bank-login">
-                    <Button variant="bank" size="lg" className="w-full text-lg py-3 hover:bg-gradient-prestige">
-                      Bank Login
-                      <ArrowRight className="ml-2 h-6 w-6 group-hover:translate-x-1 transition-transform" />
+                    <Button variant="bank" size="lg" className="w-full text-xl py-4 hover:bg-gradient-prestige">
+                      Enter Portal
+                      <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </Link>
                 </CardContent>
