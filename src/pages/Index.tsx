@@ -128,11 +128,11 @@ const Index = () => {
             </div>
             
             {/* Main Heading */}
-            <h2 className="text-4xl font-bold text-foreground mb-6 animate-fade-in">
-              <span className="bg-gradient-justice bg-clip-text text-transparent animate-pulse block mb-4">
+            <h2 className="text-5xl font-bold text-foreground mb-6 animate-fade-in">
+              <span className="bg-gradient-justice bg-clip-text text-transparent animate-pulse block mb-4 uppercase tracking-wide">
                 Welcome to Babu advocates
               </span>
-              <span className="text-primary animate-bounce text-3xl">
+              <span className="text-primary animate-bounce text-4xl uppercase tracking-wider hover:scale-105 transition-all duration-500">
                 your legal doctor
               </span>
             </h2>
