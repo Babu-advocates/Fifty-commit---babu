@@ -8,6 +8,7 @@ import { History, FileText, Calendar, User, DollarSign, CheckCircle, XCircle, Ey
 import { EmployeeSidebar } from "@/components/EmployeeSidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { QueryForm } from "@/components/QueryForm";
+import { ApplicationDetailsModal } from "@/components/ApplicationDetailsModal";
 import { useState, useMemo, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -34,6 +35,8 @@ const PastApplications = () => {
   const [applications, setApplications] = useState<Application[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedApplication, setSelectedApplication] = useState<Application | null>(null);
+  const [detailsModalOpen, setDetailsModalOpen] = useState(false);
+  const [selectedApplicationId, setSelectedApplicationId] = useState<string>("");
 
   // Determine if this is an admin route
   const isAdminRoute = location.pathname.startsWith('/admin');
@@ -454,116 +457,17 @@ const PastApplications = () => {
                                 </div>
                                 
                                 <div className="flex items-center gap-2 ml-4">
-                                  <Dialog>
-                                    <DialogTrigger asChild>
-                                      <Button 
-                                        variant="outline" 
-                                        size="sm"
-                                        onClick={() => setSelectedApplication(application)}
-                                      >
-                                        <Eye className="h-4 w-4 mr-2" />
-                                        View Details
-                                      </Button>
-                                    </DialogTrigger>
-                                    <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
-                                      <DialogHeader>
-                                        <DialogTitle className="flex items-center gap-2">
-                                          <FileText className="h-5 w-5" />
-                                          Application Details - {selectedApplication?.borrower_name}
-                                        </DialogTitle>
-                                      </DialogHeader>
-                                      
-                                      {selectedApplication && (
-                                        <div className="space-y-6">
-                                          {/* Basic Information */}
-                                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                            <Card>
-                                              <CardHeader>
-                                                <CardTitle className="text-lg flex items-center gap-2">
-                                                  <User className="h-5 w-5" />
-                                                  Borrower Information
-                                                </CardTitle>
-                                              </CardHeader>
-                                              <CardContent className="space-y-3">
-                                                <div>
-                                                  <label className="text-sm font-medium text-slate-600">Name</label>
-                                                  <p className="text-slate-800">{selectedApplication.borrower_name}</p>
-                                                </div>
-                                                <div>
-                                                  <label className="text-sm font-medium text-slate-600">Application ID</label>
-                                                  <p className="text-slate-800">{selectedApplication.application_id}</p>
-                                                </div>
-                                                <div>
-                                                  <label className="text-sm font-medium text-slate-600">Status</label>
-                                                  <div className="flex items-center gap-2 mt-1">
-                                                    {getStatusIcon(selectedApplication.status)}
-                                                    {getStatusBadge(selectedApplication.status)}
-                                                  </div>
-                                                </div>
-                                              </CardContent>
-                                            </Card>
-
-                                            <Card>
-                                              <CardHeader>
-                                                <CardTitle className="text-lg flex items-center gap-2">
-                                                  <DollarSign className="h-5 w-5" />
-                                                  Loan Details
-                                                </CardTitle>
-                                              </CardHeader>
-                                              <CardContent className="space-y-3">
-                                                <div>
-                                                  <label className="text-sm font-medium text-slate-600">Loan Type</label>
-                                                  <p className="text-slate-800">{selectedApplication.loan_type}</p>
-                                                </div>
-                                                <div>
-                                                  <label className="text-sm font-medium text-slate-600">Loan Amount</label>
-                                                  <p className="text-slate-800">₹{selectedApplication.loan_amount.toLocaleString()}</p>
-                                                </div>
-                                                <div>
-                                                  <label className="text-sm font-medium text-slate-600">Bank</label>
-                                                  <p className="text-slate-800">{selectedApplication.bank_name}</p>
-                                                </div>
-                                              </CardContent>
-                                            </Card>
-                                          </div>
-
-                                          {/* Timeline */}
-                                          <Card>
-                                            <CardHeader>
-                                              <CardTitle className="text-lg flex items-center gap-2">
-                                                <Calendar className="h-5 w-5" />
-                                                Application Timeline
-                                              </CardTitle>
-                                            </CardHeader>
-                                            <CardContent className="space-y-3">
-                                              <div>
-                                                <label className="text-sm font-medium text-slate-600">Submitted On</label>
-                                                <p className="text-slate-800">{new Date(selectedApplication.submission_date).toLocaleDateString()}</p>
-                                              </div>
-                                              <div>
-                                                <label className="text-sm font-medium text-slate-600">Last Updated</label>
-                                                <p className="text-slate-800">{new Date(selectedApplication.updated_at).toLocaleDateString()}</p>
-                                              </div>
-                                            </CardContent>
-                                          </Card>
-
-                                          {/* Query Section */}
-                                          <Card>
-                                            <CardHeader>
-                                              <CardTitle className="text-lg">Send Query to Bank</CardTitle>
-                                            </CardHeader>
-                                            <CardContent>
-                                              <QueryForm 
-                                                applicationId={selectedApplication.application_id}
-                                                currentUserType="employee"
-                                                currentUserName={localStorage.getItem('employeeUsername') || 'Employee'}
-                                              />
-                                            </CardContent>
-                                          </Card>
-                                        </div>
-                                      )}
-                                    </DialogContent>
-                                  </Dialog>
+                                  <Button 
+                                    variant="outline" 
+                                    size="sm"
+                                    onClick={() => {
+                                      setSelectedApplicationId(application.application_id);
+                                      setDetailsModalOpen(true);
+                                    }}
+                                  >
+                                    <Eye className="h-4 w-4 mr-2" />
+                                    View Details
+                                  </Button>
                                 </div>
                               </div>
                             </CardContent>
@@ -574,12 +478,19 @@ const PastApplications = () => {
                   </div>
                 </CardContent>
                 </Card>
-              </div>
-            </main>
-          </div>
+            </div>
+          </main>
         </div>
-      </SidebarProvider>
-    );
+      </div>
+
+      {/* Application Details Modal */}
+      <ApplicationDetailsModal
+        applicationId={selectedApplicationId}
+        isOpen={detailsModalOpen}
+        onClose={() => setDetailsModalOpen(false)}
+      />
+    </SidebarProvider>
+  );
   };
 
 export default PastApplications;
